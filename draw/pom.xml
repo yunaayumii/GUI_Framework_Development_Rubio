@@ -19,7 +19,7 @@
 <dependencies >
 	<dependency >
 		<groupId >com.gabriel</groupId >
-		<artifactId >drawfwx</artifactId >
+		<artifactId >drawfx</artifactId >
 		<version >1.0-SNAPSHOT</version >
 	</dependency >
 	<dependency >
