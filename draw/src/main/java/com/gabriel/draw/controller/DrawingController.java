@@ -12,8 +12,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class DrawingController  implements MouseListener, MouseMotionListener {
-    private int state;
-    private Point start;
     private Point end;
     final private DrawingView drawingView;
 
@@ -34,6 +32,7 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        Point start;
         if(appService.getDrawMode() == DrawMode.Idle) {
             if(appService.getShapeMode() == ShapeMode.Line) {
                 start = e.getPoint();
@@ -50,11 +49,9 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
     public void mouseReleased(MouseEvent e) {
          if(appService.getDrawMode() == DrawMode.MousePressed){
              if(appService.getShapeMode() == ShapeMode.Line) {
-                end = e.getPoint();
-                Line line = new Line(start, end);
-                appService.create(line);
-                appService.setDrawMode(DrawMode.Idle);
-                drawingView.repaint();
+                 end = e.getPoint();
+                 appService.create(currentShape);
+                 appService.setDrawMode(DrawMode.Idle);
              }
          }
     }
@@ -74,11 +71,9 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
         if(appService.getDrawMode() == DrawMode.MousePressed) {
             if (appService.getShapeMode() == ShapeMode.Line) {
                 end = e.getPoint();
-                Graphics g = drawingView.getGraphics();
                 currentShape.getRendererService().render(drawingView.getGraphics(), currentShape,true );
                 appService.scale(currentShape,end);
                 currentShape.getRendererService().render(drawingView.getGraphics(), currentShape,true );
-
             }
         }
     }
