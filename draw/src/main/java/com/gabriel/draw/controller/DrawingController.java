@@ -34,13 +34,17 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {
         Point start;
         if(appService.getDrawMode() == DrawMode.Idle) {
+            start = e.getPoint();
             if(appService.getShapeMode() == ShapeMode.Line) {
-                start = e.getPoint();
-
-                currentShape = new Line(start,start);
-                currentShape.getRendererService().render(drawingView.getGraphics(), currentShape,false );
+                currentShape = new Line(start, start);
+            } else if(appService.getShapeMode() == ShapeMode.Ellipse) {
+                currentShape = new com.gabriel.draw.model.Ellipse(start, start);
+            } else if(appService.getShapeMode() == ShapeMode.Rectangle) {
+                currentShape = new com.gabriel.draw.model.Rectangle(start, start);
+            }
+            if (currentShape != null) {
+                currentShape.getRendererService().render(drawingView.getGraphics(), currentShape, false);
                 appService.setDrawMode(DrawMode.MousePressed);
-
             }
         }
     }
@@ -48,8 +52,9 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
     @Override
     public void mouseReleased(MouseEvent e) {
          if(appService.getDrawMode() == DrawMode.MousePressed){
-             if(appService.getShapeMode() == ShapeMode.Line) {
-                 end = e.getPoint();
+             end = e.getPoint();
+             if (currentShape != null) {
+                 appService.scale(currentShape, end);
                  appService.create(currentShape);
                  appService.setDrawMode(DrawMode.Idle);
              }
@@ -69,11 +74,16 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         if(appService.getDrawMode() == DrawMode.MousePressed) {
-            if (appService.getShapeMode() == ShapeMode.Line) {
+            if (currentShape != null) {
+                // First, erase the previous shape by drawing it again with XOR
+                currentShape.getRendererService().render(drawingView.getGraphics(), currentShape, true);
+
+                // Update shape to new position
                 end = e.getPoint();
-                currentShape.getRendererService().render(drawingView.getGraphics(), currentShape,true );
-                appService.scale(currentShape,end);
-                currentShape.getRendererService().render(drawingView.getGraphics(), currentShape,true );
+                appService.scale(currentShape, end);
+
+                // Draw the shape at the new position
+                currentShape.getRendererService().render(drawingView.getGraphics(), currentShape, true);
             }
         }
     }
