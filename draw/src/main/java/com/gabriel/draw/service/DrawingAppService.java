@@ -14,7 +14,7 @@ public class  DrawingAppService implements AppService {
     final private Drawing drawing;
     private Color color;
     Color fill;
-    private ShapeMode shapeMode = ShapeMode.Line;
+    private ShapeMode shapeMode = ShapeMode.Line; // to check
     private DrawMode drawMode = DrawMode.Idle;
 
     MoverService moverService;
