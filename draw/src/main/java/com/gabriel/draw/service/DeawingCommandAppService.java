@@ -20,7 +20,7 @@ public class DeawingCommandAppService implements AppService {
 
     @Override
     public void undo() {
-        CommandService.undo();;
+        CommandService.undo();
         appService.repaint();
     }
 
