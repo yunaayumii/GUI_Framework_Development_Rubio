@@ -36,7 +36,7 @@ public class DeawingCommandAppService implements AppService {
     }
 
     @Override
-    public void setShapeMode(ShapeMode shapeMode) {
+    public void setShapeMode(ShapeMode shapeMode) { //TODO
         appService.setShapeMode(shapeMode);
     }
 
@@ -46,7 +46,7 @@ public class DeawingCommandAppService implements AppService {
     }
 
     @Override
-    public void setDrawMode(DrawMode drawMode) {
+    public void setDrawMode(DrawMode drawMode) { //TODO
         appService.setDrawMode(drawMode);
     }
 
@@ -56,7 +56,7 @@ public class DeawingCommandAppService implements AppService {
     }
 
     @Override
-    public void setColor(Color color) {
+    public void setColor(Color color) { //TODO
         appService.setColor(color);
     }
 
@@ -66,7 +66,7 @@ public class DeawingCommandAppService implements AppService {
     }
 
     @Override
-    public void setFill(Color color) {
+    public void setFill(Color color) { //TODO
         appService.setFill(color);
     }
 
