@@ -1,6 +1,7 @@
 package com.gabriel.draw.service;
 
 import com.gabriel.draw.command.AddShapeCommand;
+import com.gabriel.draw.command.setDrawModeCommand;
 import com.gabriel.draw.command.setShapeModeCommand;
 import com.gabriel.drawfx.DrawMode;
 import com.gabriel.drawfx.ShapeMode;
@@ -49,7 +50,8 @@ public class DeawingCommandAppService implements AppService {
 
     @Override
     public void setDrawMode(DrawMode drawMode) { //TODO
-        appService.setDrawMode(drawMode);
+        Command command = new setDrawModeCommand(appService, drawMode);
+        CommandService.ExecuteCommand(command);
     }
 
     @Override
