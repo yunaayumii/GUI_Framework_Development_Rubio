@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class DrawingAppService implements AppService {
 
-    final private Drawing drawing;;
+    final private Drawing drawing;
     MoverService moverService;
     ScalerService scalerService;
     JPanel drawingView;
