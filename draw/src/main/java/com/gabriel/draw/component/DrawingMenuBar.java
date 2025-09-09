@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.Color;
 
 public class DrawingMenuBar extends JMenuBar implements ActionListener {
     private AppService appService;
@@ -15,7 +16,8 @@ public class DrawingMenuBar extends JMenuBar implements ActionListener {
     private final JMenuItem lineMenuItem = new JMenuItem("Line");
     private final JMenuItem rectangleMenuItem = new JMenuItem("Rectangle");
     private final JMenuItem ellipseMenuItem = new JMenuItem("Ellipse");
-
+    private final JMenu colorMenu = new JMenu("Color");
+    private final JMenuItem chooseColorItem = new JMenuItem("Choose Color");
     private final JMenuItem undoMenuItem = new JMenuItem("Undo");
     private final JMenuItem redoMenuItem = new JMenuItem("Redo");
 
@@ -35,13 +37,18 @@ public class DrawingMenuBar extends JMenuBar implements ActionListener {
 
         JMenu drawMenu = new JMenu("Draw");
         drawMenu.setMnemonic(KeyEvent.VK_D);
-        editMenu.add(drawMenu);
+        add(drawMenu); //make it top level
         drawMenu.add(lineMenuItem);
         lineMenuItem.addActionListener(this);
         drawMenu.add(rectangleMenuItem);
         rectangleMenuItem.addActionListener(this);
         drawMenu.add(ellipseMenuItem);
         ellipseMenuItem.addActionListener(this);
+
+        colorMenu.setMnemonic(KeyEvent.VK_C);
+        add(colorMenu);
+        colorMenu.add(chooseColorItem);
+        chooseColorItem.addActionListener(this);
     }
 
     @Override
@@ -50,7 +57,7 @@ public class DrawingMenuBar extends JMenuBar implements ActionListener {
         if(e.getSource() == undoMenuItem) {
             appService.undo();
         }
-        if(e.getSource() == redoMenuItem) {
+        else if(e.getSource() == redoMenuItem) {
             appService.redo();
         }
         else if(e.getSource() == lineMenuItem){
@@ -61,6 +68,12 @@ public class DrawingMenuBar extends JMenuBar implements ActionListener {
         }
         else if(e.getSource() == ellipseMenuItem){
             appService.setShapeMode( ShapeMode.Ellipse);
+        }
+        else if(e.getSource() == chooseColorItem){
+            Color selectedColor = JColorChooser.showDialog(this, "Choose a color", appService.getColor());
+            if (selectedColor != null) {
+                appService.setColor(selectedColor);
+            }
         }
     }
 }

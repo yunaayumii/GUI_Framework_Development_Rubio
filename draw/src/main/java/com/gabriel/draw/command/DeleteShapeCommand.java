@@ -8,7 +8,7 @@ public class DeleteShapeCommand implements Command {
     Shape shape;
     AppService appService;
 
-    public DeleteShapeCommand(AppService appService, Shape shape){
+    public DeleteShapeCommand(AppService appService, Shape shape) {
         this.shape = shape;
         this.appService = appService;
     }

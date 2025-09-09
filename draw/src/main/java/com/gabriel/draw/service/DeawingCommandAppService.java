@@ -48,7 +48,7 @@ public class DeawingCommandAppService implements AppService {
 
     @Override
     public void setDrawMode(DrawMode drawMode) {
-        AppService appService = this.appService;
+        appService.setDrawMode(drawMode);
     }
 
     @Override
@@ -73,14 +73,9 @@ public class DeawingCommandAppService implements AppService {
         CommandService.ExecuteCommand(command);
     }
 
-    public void getPosition(Shape shape){
-        appService.getPosition(shape);
-    }
-
     @Override
     public void move(Shape shape, Point newLoc) {
-        Command command = new MoveShapeCommand(appService, shape, newLoc);
-        CommandService.ExecuteCommand(command);
+        appService.move(shape,newLoc);
     }
 
     @Override
