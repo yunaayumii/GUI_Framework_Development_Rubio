@@ -18,17 +18,17 @@ public class setFillCommand implements Command {
 
     @Override
     public void execute() {
-        prevColor = appService.getColor();
-        appService.setColor(color);
+        prevColor = appService.getFill();
+        appService.setFill(color);
     }
 
     @Override
     public void undo() {
-        appService.setColor(prevColor);
+        appService.setFill(prevColor);
     }
 
     @Override
     public void redo() {
-        appService.setColor(color);
+        appService.setFill(color);
     }
 }

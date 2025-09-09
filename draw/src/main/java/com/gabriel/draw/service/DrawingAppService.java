@@ -95,6 +95,10 @@ public class DrawingAppService implements AppService {
             shape.setColor(Color.RED);
         }
 
+        if(drawing.getFill() != null) {
+            shape.setFill(drawing.getFill());
+        }
+
         this.drawing.getShapes().add(shape);
         repaint();
     }

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
+import java.sql.SQLOutput;
 
 public class DrawingMenuBar extends JMenuBar implements ActionListener {
     private AppService appService;
@@ -18,6 +19,7 @@ public class DrawingMenuBar extends JMenuBar implements ActionListener {
     private final JMenuItem ellipseMenuItem = new JMenuItem("Ellipse");
     private final JMenu colorMenu = new JMenu("Color");
     private final JMenuItem chooseColorItem = new JMenuItem("Choose Color");
+    private final JMenuItem fillColorItem = new JMenuItem("Fill Color");
     private final JMenuItem undoMenuItem = new JMenuItem("Undo");
     private final JMenuItem redoMenuItem = new JMenuItem("Redo");
 
@@ -45,10 +47,13 @@ public class DrawingMenuBar extends JMenuBar implements ActionListener {
         drawMenu.add(ellipseMenuItem);
         ellipseMenuItem.addActionListener(this);
 
+        JMenu colorMenu = new JMenu("Color");
         colorMenu.setMnemonic(KeyEvent.VK_C);
         add(colorMenu);
         colorMenu.add(chooseColorItem);
         chooseColorItem.addActionListener(this);
+        colorMenu.add(fillColorItem);
+        fillColorItem.addActionListener(this);
     }
 
     @Override
@@ -70,9 +75,15 @@ public class DrawingMenuBar extends JMenuBar implements ActionListener {
             appService.setShapeMode( ShapeMode.Ellipse);
         }
         else if(e.getSource() == chooseColorItem){
-            Color selectedColor = JColorChooser.showDialog(this, "Choose a color", appService.getColor());
+            Color outlineColor = JColorChooser.showDialog(this, "Choose a color", appService.getColor());
+            if (outlineColor != null) {
+                appService.setColor(outlineColor);
+            }
+        }
+        else if(e.getSource() == fillColorItem){
+            Color selectedColor = JColorChooser.showDialog(this, "Choose a fill color", appService.getFill());
             if (selectedColor != null) {
-                appService.setColor(selectedColor);
+                appService.setFill(selectedColor);
             }
         }
     }
