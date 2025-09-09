@@ -16,7 +16,7 @@ public class DrawingMenuBar extends JMenuBar implements ActionListener {
     private final JMenuItem rectangleMenuItem = new JMenuItem("Rectangle");
     private final JMenuItem ellipseMenuItem = new JMenuItem("Ellipse");
 
-    private final JMenuItem undoMenuItem = new JMenuItem("Umdo");
+    private final JMenuItem undoMenuItem = new JMenuItem("Undo");
     private final JMenuItem redoMenuItem = new JMenuItem("Redo");
 
 
