@@ -88,7 +88,15 @@ public class DrawingAppService implements AppService {
     @Override
     public void create(Shape shape) {
         shape.setId(this.drawing.getShapes().size());
+
+        if(drawing.getColor() != null) {
+            shape.setColor(drawing.getColor());
+        } else {
+            shape.setColor(Color.BLACK);
+        }
+
         this.drawing.getShapes().add(shape);
+        repaint();
     }
 
     @Override
