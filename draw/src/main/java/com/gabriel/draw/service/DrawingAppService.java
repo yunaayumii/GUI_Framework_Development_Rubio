@@ -92,7 +92,7 @@ public class DrawingAppService implements AppService {
         if(drawing.getColor() != null) {
             shape.setColor(drawing.getColor());
         } else {
-            shape.setColor(Color.BLACK);
+            shape.setColor(Color.RED);
         }
 
         this.drawing.getShapes().add(shape);
