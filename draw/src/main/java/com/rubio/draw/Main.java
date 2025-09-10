@@ -1,13 +1,11 @@
-package com.gabriel.draw;
+package com.rubio.draw;
 
-import com.gabriel.draw.component.DrawingMenuBar;
-import com.gabriel.draw.controller.DrawingWindowController;
-import com.gabriel.draw.service.DeawingCommandAppService;
-import com.gabriel.draw.service.DrawingAppService;
-import com.gabriel.draw.controller.DrawingController;
-import com.gabriel.draw.view.DrawingView;
-import com.gabriel.draw.view.DrawingFrame;
-import com.gabriel.drawfx.model.Drawing;
+import com.rubio.draw.component.DrawingMenuBar;
+import com.rubio.draw.service.DeawingCommandAppService;
+import com.rubio.draw.service.DrawingAppService;
+import com.rubio.draw.controller.DrawingController;
+import com.rubio.draw.view.DrawingView;
+import com.rubio.draw.view.DrawingFrame;
 import com.gabriel.drawfx.service.AppService;
 
 import javax.swing.*;

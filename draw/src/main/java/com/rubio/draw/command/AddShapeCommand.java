@@ -1,4 +1,4 @@
-package com.gabriel.draw.command;
+package com.rubio.draw.command;
 
 import com.gabriel.drawfx.command.Command;
 import com.gabriel.drawfx.model.Shape;

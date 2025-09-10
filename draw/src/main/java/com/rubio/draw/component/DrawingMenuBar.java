@@ -1,4 +1,4 @@
-package com.gabriel.draw.component;
+package com.rubio.draw.component;
 
 import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.service.AppService;

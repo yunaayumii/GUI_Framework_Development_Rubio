@@ -1,8 +1,7 @@
-package com.gabriel.draw.model;
+package com.rubio.draw.model;
 
 
-import com.gabriel.draw.service.LineRendererService;
-import lombok.Data;
+import com.rubio.draw.service.LineRendererService;
 import com.gabriel.drawfx.model.Shape;
 import java.awt.*;
 

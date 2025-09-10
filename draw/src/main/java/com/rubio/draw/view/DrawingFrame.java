@@ -1,8 +1,6 @@
-package com.gabriel.draw.view;
+package com.rubio.draw.view;
 
-import com.gabriel.draw.component.DrawingMenuBar;
-import com.gabriel.draw.controller.DrawingWindowController;
-import com.gabriel.drawfx.model.Drawing;
+import com.rubio.draw.controller.DrawingWindowController;
 import com.gabriel.drawfx.service.AppService;
 
 import javax.swing.*;

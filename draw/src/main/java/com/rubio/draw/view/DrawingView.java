@@ -1,7 +1,5 @@
-package com.gabriel.draw.view;
+package com.rubio.draw.view;
 
-import com.gabriel.draw.controller.DrawingController;
-import com.gabriel.draw.controller.DrawingWindowController;
 import com.gabriel.drawfx.model.Drawing;
 import com.gabriel.drawfx.model.Shape;
 import com.gabriel.drawfx.service.AppService;

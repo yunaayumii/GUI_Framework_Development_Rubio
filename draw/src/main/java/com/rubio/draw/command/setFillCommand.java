@@ -1,33 +1,34 @@
-package com.gabriel.draw.command;
+package com.rubio.draw.command;
 
+import com.gabriel.drawfx.DrawMode;
 import com.gabriel.drawfx.command.Command;
 import com.gabriel.drawfx.service.AppService;
 
 import java.awt.*;
 
-public class setColorCommand implements Command {
+public class setFillCommand implements Command {
     AppService appService;
     Color color;
     Color prevColor;
 
-    public setColorCommand(AppService appService, Color color) {
+    public setFillCommand(AppService appService, Color color) {
         this.appService = appService;
         this.color = color;
     }
 
     @Override
     public void execute() {
-        prevColor = appService.getColor();
-        appService.setColor(color);
+        prevColor = appService.getFill();
+        appService.setFill(color);
     }
 
     @Override
     public void undo() {
-        appService.setColor(prevColor);
+        appService.setFill(prevColor);
     }
 
     @Override
     public void redo() {
-        appService.setColor(color);
+        appService.setFill(color);
     }
 }

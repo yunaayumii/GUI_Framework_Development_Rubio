@@ -1,12 +1,13 @@
-package com.gabriel.draw.service;
+package com.rubio.draw.service;
 
-import com.gabriel.draw.command.*;
+import com.rubio.draw.command.*;
 import com.gabriel.drawfx.DrawMode;
 import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.command.Command;
 import com.gabriel.drawfx.command.CommandService;
 import com.gabriel.drawfx.model.Shape;
 import com.gabriel.drawfx.service.AppService;
+import com.rubio.draw.command.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -75,12 +76,14 @@ public class DeawingCommandAppService implements AppService {
 
     @Override
     public void move(Shape shape, Point newLoc) {
-        appService.move(shape,newLoc);
+        Command command = new moveCommand(appService, shape, newLoc);
+        CommandService.ExecuteCommand(command);
     }
 
     @Override
     public void scale(Shape shape, Point newEnd) {
-        appService.scale(shape,newEnd);
+        Command command = new scaleCommand(appService, shape, newEnd);
+        CommandService.ExecuteCommand(command);
     }
 
     @Override

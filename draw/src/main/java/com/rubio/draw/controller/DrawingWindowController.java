@@ -1,4 +1,4 @@
-package com.gabriel.draw.controller;
+package com.rubio.draw.controller;
 import com.gabriel.drawfx.service.AppService;
 
 import java.awt.event.WindowEvent;

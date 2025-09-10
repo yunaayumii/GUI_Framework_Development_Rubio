@@ -1,6 +1,5 @@
-package com.gabriel.draw.service;
+package com.rubio.draw.service;
 
-import com.gabriel.draw.view.DrawingView;
 import com.gabriel.drawfx.DrawMode;
 import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.model.Drawing;

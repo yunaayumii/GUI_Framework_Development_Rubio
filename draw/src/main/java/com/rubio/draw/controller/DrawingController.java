@@ -1,18 +1,16 @@
-package com.gabriel.draw.controller;
+package com.rubio.draw.controller;
 
-import com.gabriel.draw.model.Ellipse;
-import com.gabriel.draw.model.Line;
-import com.gabriel.draw.model.Rectangle;
+import com.rubio.draw.model.Ellipse;
+import com.rubio.draw.model.Line;
+import com.rubio.draw.model.Rectangle;
 import com.gabriel.drawfx.DrawMode;
-import com.gabriel.drawfx.ShapeMode;
-import com.gabriel.draw.view.DrawingView;
+import com.rubio.draw.view.DrawingView;
 import com.gabriel.drawfx.service.AppService;
 import com.gabriel.drawfx.model.Shape;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.Ellipse2D;
 
 public class DrawingController  implements MouseListener, MouseMotionListener {
     private Point end;
