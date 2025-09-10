@@ -1,5 +1,6 @@
 package com.gabriel.draw.service;
 
+import com.gabriel.draw.view.DrawingView;
 import com.gabriel.drawfx.DrawMode;
 import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.model.Drawing;
@@ -8,62 +9,72 @@ import com.gabriel.drawfx.service.AppService;
 import com.gabriel.drawfx.service.MoverService;
 import com.gabriel.drawfx.service.ScalerService;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class  DrawingAppService implements AppService {
-    final private Drawing drawing;
-    private Color color;
-    Color fill;
-    private ShapeMode shapeMode = ShapeMode.Line; // to check
-    private DrawMode drawMode = DrawMode.Idle;
 
+public class DrawingAppService implements AppService {
+
+    final private Drawing drawing;
     MoverService moverService;
     ScalerService scalerService;
-
+    JPanel drawingView;
     public DrawingAppService(){
         drawing = new Drawing();
         moverService = new MoverService();
         scalerService = new ScalerService();
+        drawing.setDrawMode(DrawMode.Idle);
+        drawing.setShapeMode(ShapeMode.Ellipse);
+    }
+
+    @Override
+    public void undo() {
+
+    }
+
+    @Override
+    public void redo() {
+
     }
 
     @Override
     public ShapeMode getShapeMode() {
-        return shapeMode;
+        return drawing.getShapeMode();
     }
 
     @Override
     public void setShapeMode(ShapeMode shapeMode) {
-        this.shapeMode = shapeMode;
+        drawing.setShapeMode(shapeMode);
     }
 
     @Override
     public DrawMode getDrawMode() {
-        return drawMode;
+        return drawing.getDrawMode();
     }
 
     @Override
     public void setDrawMode(DrawMode drawMode) {
-        this.drawMode = drawMode;
+        this.drawing.setDrawMode(drawMode);
     }
 
     @Override
     public Color getColor() {
-        return color;
+        return drawing.getColor();
     }
 
     @Override
     public void setColor(Color color) {
-        this.color = color;
+        drawing.setColor(color);
     }
 
     @Override
-    public Color getFill() {
-        return fill;
+    public Color getFill(){
+        return drawing.getFill();
     }
 
     @Override
     public void setFill(Color color) {
-        this.fill = fill;
+        drawing.setFill(color);
     }
 
     @Override
@@ -77,7 +88,25 @@ public class  DrawingAppService implements AppService {
 
     @Override
     public void create(Shape shape) {
+        shape.setId(this.drawing.getShapes().size());
+
+        if(drawing.getColor() != null) {
+            shape.setColor(drawing.getColor());
+        } else {
+            shape.setColor(Color.RED);
+        }
+
+        if(drawing.getFill() != null) {
+            shape.setFill(drawing.getFill());
+        }
+
         this.drawing.getShapes().add(shape);
+        repaint();
+    }
+
+    @Override
+    public void delete(Shape shape) {
+        drawing.getShapes().remove(shape);
     }
 
     @Override
@@ -88,5 +117,20 @@ public class  DrawingAppService implements AppService {
     @Override
     public Object getModel() {
         return drawing;
+    }
+
+    @Override
+    public JPanel getView() {
+        return drawingView;
+    }
+
+    @Override
+    public void setView(JPanel panel) {
+        this.drawingView = panel;
+    }
+
+    @Override
+    public void repaint() {
+        drawingView.repaint();
     }
 }

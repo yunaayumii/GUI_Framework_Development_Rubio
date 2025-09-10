@@ -6,8 +6,6 @@ import lombok.Data;
 import com.gabriel.drawfx.model.Shape;
 import java.awt.*;
 
-
-@Data
 public class Line extends Shape {
 
     public Line(Point start, Point end){
