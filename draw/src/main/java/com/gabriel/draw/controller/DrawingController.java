@@ -36,6 +36,7 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
         Point start;
         if(appService.getDrawMode() == DrawMode.Idle) {
             start = e.getPoint();
+
             switch (appService.getShapeMode()){
                 case Line:  currentShape = new Line(start, start);
                     break;
@@ -58,6 +59,7 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
              appService.create(currentShape);
              appService.setDrawMode(DrawMode.Idle);
            }
+
     }
 
     @Override
@@ -73,6 +75,7 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         if(appService.getDrawMode() == DrawMode.MousePressed) {
+
                 end = e.getPoint();
                 currentShape.getRendererService().render(drawingView.getGraphics(), currentShape,true );
                 appService.scale(currentShape,end);
