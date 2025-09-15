@@ -25,9 +25,11 @@ public class RectangleRendererService implements RendererService {
         }
 
         if(xor) {
-            g.setXORMode(shape.getColor());
+            g.setXORMode(Color.WHITE);
         }
         else {
+            g.setPaintMode();
+
             if (shape.getFill() != null) {
                 g.setColor(shape.getFill());
                 g.fillRect(x, y, width, height);
