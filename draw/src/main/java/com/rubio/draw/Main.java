@@ -1,6 +1,6 @@
 package com.rubio.draw;
 
-import com.rubio.draw.component.DrawingMenuBar;
+import com.rubio.draw.view.DrawingMenuBar;
 import com.rubio.draw.service.DeawingCommandAppService;
 import com.rubio.draw.service.DrawingAppService;
 import com.rubio.draw.controller.DrawingController;

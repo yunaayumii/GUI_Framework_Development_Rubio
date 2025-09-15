@@ -1,4 +1,5 @@
-package com.rubio.draw.component;
+package com.rubio.draw.view;
+
 
 import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.service.AppService;
@@ -9,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
-import java.sql.SQLOutput;
 
 public class DrawingMenuBar extends JMenuBar implements ActionListener {
     private AppService appService;
