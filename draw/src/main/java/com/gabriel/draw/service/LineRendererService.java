@@ -1,6 +1,6 @@
-package com.rubio.draw.service;
+package com.gabriel.draw.service;
 
-import com.rubio.draw.model.Line;
+import com.gabriel.draw.model.Line;
 import com.gabriel.drawfx.service.RendererService;
 import com.gabriel.drawfx.model.Shape;
 

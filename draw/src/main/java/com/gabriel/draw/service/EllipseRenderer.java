@@ -1,20 +1,21 @@
-package com.rubio.draw.service;
+package com.gabriel.draw.service;
 
-import com.rubio.draw.model.Rectangle;
+import com.gabriel.draw.model.Ellipse;
 import com.gabriel.drawfx.model.Shape;
 import com.gabriel.drawfx.service.RendererService;
 
 import java.awt.*;
 
-public class RectangleRendererService implements RendererService {
+public class EllipseRenderer implements RendererService {
     @Override
     public void render(Graphics g, Shape shape, boolean xor) {
-        Rectangle line = (Rectangle) shape;
+        Ellipse ellipse = (Ellipse) shape;
 
         int x = shape.getLocation().x;
         int y = shape.getLocation().y;
         int width = shape.getEnd().x-shape.getLocation().x;
         int height = shape.getEnd().y-shape.getLocation().y;
+
         if(width < 0) {
             x = shape.getEnd().x;
             width = -width;
@@ -24,18 +25,14 @@ public class RectangleRendererService implements RendererService {
             height = -height;
         }
 
-        if(xor) {
-            g.setXORMode(Color.WHITE);
-        }
-        else {
-            g.setPaintMode();
-
+        if (xor) {
+            g.setXORMode(shape.getColor());
+        } else {
             if (shape.getFill() != null) {
                 g.setColor(shape.getFill());
-                g.fillRect(x, y, width, height);
+                g.fillOval(x, y, width, height);
             }
         }
-        g.setColor(shape.getColor());
-        g.drawRect(x, y, width, height);
+        g.drawOval(x,y, width, height);
     }
 }

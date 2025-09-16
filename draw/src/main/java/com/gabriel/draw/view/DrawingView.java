@@ -1,4 +1,4 @@
-package com.rubio.draw.view;
+package com.gabriel.draw.view;
 
 import com.gabriel.drawfx.model.Drawing;
 import com.gabriel.drawfx.model.Shape;

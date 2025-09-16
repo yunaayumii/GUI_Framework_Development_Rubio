@@ -1,6 +1,6 @@
-package com.rubio.draw.model;
+package com.gabriel.draw.model;
 
-import com.rubio.draw.service.EllipseRenderer;
+import com.gabriel.draw.service.EllipseRenderer;
 import com.gabriel.drawfx.model.Shape;
 
 import java.awt.*;

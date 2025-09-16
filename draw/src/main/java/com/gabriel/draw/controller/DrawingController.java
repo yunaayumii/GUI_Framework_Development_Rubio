@@ -1,10 +1,10 @@
-package com.rubio.draw.controller;
+package com.gabriel.draw.controller;
 
-import com.rubio.draw.model.Ellipse;
-import com.rubio.draw.model.Line;
-import com.rubio.draw.model.Rectangle;
+import com.gabriel.draw.model.Ellipse;
+import com.gabriel.draw.model.Line;
+import com.gabriel.draw.model.Rectangle;
 import com.gabriel.drawfx.DrawMode;
-import com.rubio.draw.view.DrawingView;
+import com.gabriel.draw.view.DrawingView;
 import com.gabriel.drawfx.service.AppService;
 import com.gabriel.drawfx.model.Shape;
 import java.awt.*;

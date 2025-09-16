@@ -1,13 +1,13 @@
-package com.rubio.draw.service;
+package com.gabriel.draw.service;
 
-import com.rubio.draw.command.*;
+import com.gabriel.draw.command.*;
 import com.gabriel.drawfx.DrawMode;
 import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.command.Command;
 import com.gabriel.drawfx.command.CommandService;
 import com.gabriel.drawfx.model.Shape;
 import com.gabriel.drawfx.service.AppService;
-import com.rubio.draw.command.*;
+import com.gabriel.draw.command.*;
 
 import javax.swing.*;
 import java.awt.*;
