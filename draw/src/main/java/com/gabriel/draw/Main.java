@@ -27,6 +27,9 @@ public class Main {
         DrawingView drawingView = new DrawingView(appService);
         DrawingController drawingController = new DrawingController(appService, drawingView);
 
+        // Register UI components with the command service for button state updates
+        DeawingCommandAppService.setUIComponents(drawingToolBar, drawingMenuBar);
+
         // Set up the frame layout properly
         drawingFrame.setLayout(new java.awt.BorderLayout());
         drawingFrame.add(drawingToolBar, java.awt.BorderLayout.NORTH);

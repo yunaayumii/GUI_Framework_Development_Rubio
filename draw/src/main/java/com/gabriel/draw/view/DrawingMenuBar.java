@@ -3,6 +3,7 @@ package com.gabriel.draw.view;
 import com.gabriel.drawfx.ActionCommand;
 import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.service.AppService;
+import com.gabriel.drawfx.command.CommandService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -59,5 +60,13 @@ public class DrawingMenuBar extends JMenuBar {
         colorMenu.add(fillColorItem); // fill color
         fillColorItem.addActionListener(actionListener);
         fillColorItem.setActionCommand(ActionCommand.FILL);
+
+        // Initialize menu item states
+        updateMenuStates();
+    }
+
+    public void updateMenuStates() {
+        undoMenuItem.setEnabled(CommandService.canUndo());
+        redoMenuItem.setEnabled(CommandService.canRedo());
     }
 }

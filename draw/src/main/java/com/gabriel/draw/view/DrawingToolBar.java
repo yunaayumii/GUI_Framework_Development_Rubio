@@ -1,6 +1,7 @@
 package com.gabriel.draw.view;
 
 import com.gabriel.drawfx.ActionCommand;
+import com.gabriel.drawfx.command.CommandService;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -59,5 +60,13 @@ public class DrawingToolBar extends JToolBar {
         redoButton.setActionCommand(ActionCommand.REDO);
         redoButton.setToolTipText("Redo");
         add(redoButton);
+
+        // Initialize button states
+        updateButtonStates();
+    }
+
+    public void updateButtonStates() {
+        undoButton.setEnabled(CommandService.canUndo());
+        redoButton.setEnabled(CommandService.canRedo());
     }
 }
