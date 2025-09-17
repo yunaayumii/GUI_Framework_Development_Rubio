@@ -26,14 +26,14 @@ public class Main {
         DrawingToolBar drawingToolBar = new DrawingToolBar(actionListener);
         DrawingView drawingView = new DrawingView(appService);
         DrawingController drawingController = new DrawingController(appService, drawingView);
-        drawingView.addMouseMotionListener(drawingController);
-        drawingView.addMouseListener(drawingController);
-        drawingFrame.setContentPane(drawingView);
 
+        // Set up the frame layout properly
+        drawingFrame.setLayout(new java.awt.BorderLayout());
+        drawingFrame.add(drawingToolBar, java.awt.BorderLayout.NORTH);
+        drawingFrame.add(drawingView, java.awt.BorderLayout.CENTER);
 
         drawingMenuBar.setVisible(true);
         drawingFrame.setJMenuBar(drawingMenuBar);
-
         drawingFrame.setVisible(true);
         drawingFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         drawingFrame.setSize(500,500);
