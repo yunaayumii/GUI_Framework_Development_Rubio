@@ -44,6 +44,8 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
                     currentShape = new Ellipse(start, start);
                     break;
             }
+            // Set shape color to currently selected color
+            currentShape.setColor(appService.getColor());
             currentShape.getRendererService().render(drawingView.getGraphics(), currentShape,false );
             appService.setDrawMode(DrawMode.MousePressed);
         }
@@ -51,11 +53,11 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-         if(appService.getDrawMode() == DrawMode.MousePressed){
-             end = e.getPoint();
-             appService.create(currentShape);
-             appService.setDrawMode(DrawMode.Idle);
-           }
+        if(appService.getDrawMode() == DrawMode.MousePressed){
+            end = e.getPoint();
+            appService.create(currentShape); // Only push to stack here
+            appService.setDrawMode(DrawMode.Idle);
+        }
     }
 
     @Override
@@ -71,11 +73,10 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         if(appService.getDrawMode() == DrawMode.MousePressed) {
-                end = e.getPoint();
-                currentShape.getRendererService().render(drawingView.getGraphics(), currentShape,true );
-                appService.scale(currentShape,end);
-                currentShape.getRendererService().render(drawingView.getGraphics(), currentShape,true );
-           }
+            end = e.getPoint();
+            currentShape.setEnd(end); // Just update endpoint for preview
+            currentShape.getRendererService().render(drawingView.getGraphics(), currentShape, true);
+        }
     }
 
     @Override

@@ -17,24 +17,32 @@ public class ActionController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand() == ActionCommand.UNDO) {
+        if(e.getActionCommand().equals(ActionCommand.UNDO)) {
             appService.undo();
         }
-        else if(e.getActionCommand() == ActionCommand.REDO) {
+        else if(e.getActionCommand().equals(ActionCommand.REDO)) {
             appService.redo();
         }
-        else if(e.getActionCommand() == ActionCommand.LINE) {
+        else if(e.getActionCommand().equals(ActionCommand.LINE)) {
             appService.setShapeMode(ShapeMode.Line);
         }
-        else if(e.getActionCommand()  ==  ActionCommand.RECT) {
+        else if(e.getActionCommand().equals(ActionCommand.RECT)) {
             appService.setShapeMode(ShapeMode.Rectangle);
         }
-        else if(e.getActionCommand() == ActionCommand.ELLIPSE) {
+        else if(e.getActionCommand().equals(ActionCommand.ELLIPSE)) {
             appService.setShapeMode(ShapeMode.Ellipse);
         }
-        else if(e.getActionCommand() == ActionCommand.COLOR) {
+        else if(e.getActionCommand().equals(ActionCommand.COLOR)) {
+            Color selectedColor = JColorChooser.showDialog(null, "Choose a color", Color.WHITE);
+            if (selectedColor != null) {
+                appService.setColor(selectedColor);
+            }
+        }
+        else if(e.getActionCommand().equals(ActionCommand.FILL)) {
             Color selectedColor = JColorChooser.showDialog(null, "Choose a fill color", Color.WHITE);
-            appService.setColor( selectedColor);
+            if (selectedColor != null) {
+                appService.setFill(selectedColor);
+            }
         }
     }
 }

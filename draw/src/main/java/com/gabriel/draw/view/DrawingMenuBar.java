@@ -42,17 +42,22 @@ public class DrawingMenuBar extends JMenuBar {
         add(drawMenu);
         drawMenu.add(lineMenuItem); // line
         lineMenuItem.addActionListener(actionListener);
+        lineMenuItem.setActionCommand(ActionCommand.LINE);
         drawMenu.add(rectangleMenuItem); // rectangle
         rectangleMenuItem.addActionListener(actionListener);
+        rectangleMenuItem.setActionCommand(ActionCommand.RECT);
         drawMenu.add(ellipseMenuItem); // ellipse
         ellipseMenuItem.addActionListener(actionListener);
+        ellipseMenuItem.setActionCommand(ActionCommand.ELLIPSE);
 
         JMenu colorMenu = new JMenu("Color");
         colorMenu.setMnemonic(KeyEvent.VK_C);
         add(colorMenu);
         colorMenu.add(chooseColorItem); // choose color
         chooseColorItem.addActionListener(actionListener);
+        chooseColorItem.setActionCommand(ActionCommand.COLOR);
         colorMenu.add(fillColorItem); // fill color
         fillColorItem.addActionListener(actionListener);
+        fillColorItem.setActionCommand(ActionCommand.FILL);
     }
 }
