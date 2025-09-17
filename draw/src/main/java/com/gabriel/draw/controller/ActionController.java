@@ -17,22 +17,22 @@ public class ActionController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == ActionCommand.UNDO) {
+        if(e.getActionCommand() == ActionCommand.UNDO) {
             appService.undo();
         }
-        else if(e.getSource() == ActionCommand.REDO) {
+        else if(e.getActionCommand() == ActionCommand.REDO) {
             appService.redo();
         }
-        else if(e.getSource() == ActionCommand.LINE) {
+        else if(e.getActionCommand() == ActionCommand.LINE) {
             appService.setShapeMode(ShapeMode.Line);
         }
-        else if(e.getSource() ==  ActionCommand.RECT) {
+        else if(e.getActionCommand()  ==  ActionCommand.RECT) {
             appService.setShapeMode(ShapeMode.Rectangle);
         }
-        else if(e.getSource() == ActionCommand.ELLIPSE) {
+        else if(e.getActionCommand() == ActionCommand.ELLIPSE) {
             appService.setShapeMode(ShapeMode.Ellipse);
         }
-        else if(e.getSource() == ActionCommand.COLOR) {
+        else if(e.getActionCommand() == ActionCommand.COLOR) {
             Color selectedColor = JColorChooser.showDialog(null, "Choose a fill color", Color.WHITE);
             appService.setColor( selectedColor);
         }

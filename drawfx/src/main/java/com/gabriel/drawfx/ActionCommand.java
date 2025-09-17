@@ -1,11 +1,11 @@
 package com.gabriel.drawfx;
 
 public class ActionCommand {
-    static final public String UNDO = "undo";
-    static final public String REDO = "redo";
-    static final public String RECT = "rectangle";
-    static final public String LINE = "Line";
-    static final public String ELLIPSE = "ellipse";
-    static final public String COLOR = "color";
-    static final public String FILL = "fill";
+    public static final  String UNDO = "Undo";
+    public static final String REDO = "Redo";
+    public static final String RECT = "Rectangle";
+    public static final String LINE = "Line";
+    public static final String ELLIPSE = "Ellipse";
+    public static final String COLOR = "Color";
+    public static final String FILL = "Fill";
 }
