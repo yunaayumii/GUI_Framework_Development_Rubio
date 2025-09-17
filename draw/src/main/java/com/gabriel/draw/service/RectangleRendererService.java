@@ -34,8 +34,15 @@ public class RectangleRendererService implements RendererService {
                 g.setColor(shape.getFill());
                 g.fillRect(x, y, width, height);
             }
+
+            Color drawColor;
+            if (shape.getColor() != null) {
+                drawColor = shape.getColor();
+            } else {
+                drawColor = Color.BLACK;
+            }
+            g.setColor(drawColor);
         }
-        g.setColor(shape.getColor());
         g.drawRect(x, y, width, height);
     }
 }

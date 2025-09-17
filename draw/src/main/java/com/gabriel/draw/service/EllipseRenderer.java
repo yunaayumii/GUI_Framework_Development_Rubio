@@ -26,12 +26,24 @@ public class EllipseRenderer implements RendererService {
         }
 
         if (xor) {
-            g.setXORMode(shape.getColor());
+            g.setXORMode(Color.WHITE); // Use WHITE for XOR mode instead of potentially null color
         } else {
+            g.setPaintMode();
+
             if (shape.getFill() != null) {
                 g.setColor(shape.getFill());
                 g.fillOval(x, y, width, height);
             }
+
+            Color drawColor;
+
+            if (shape.getColor() != null) {
+                drawColor = shape.getColor();
+            } else {
+                drawColor = Color.BLACK;
+            }
+
+            g.setColor(drawColor);
         }
         g.drawOval(x,y, width, height);
     }

@@ -14,6 +14,7 @@ import java.awt.event.MouseMotionListener;
 
 public class DrawingController  implements MouseListener, MouseMotionListener {
     private Point end;
+    private Point previousEnd; // Track previous end point for XOR erasing
     final private DrawingView drawingView;
 
     Shape currentShape;
@@ -34,6 +35,7 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
         Point start;
         if(appService.getDrawMode() == DrawMode.Idle) {
             start = e.getPoint();
+            previousEnd = start; // Initialize previous end to start point
             switch (appService.getShapeMode()){
                 case Line:  currentShape = new Line(start, start);
                     break;
@@ -73,9 +75,19 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         if(appService.getDrawMode() == DrawMode.MousePressed) {
+            // First, erase the previous preview by drawing it again in XOR mode
+            if (previousEnd != null) {
+                currentShape.setEnd(previousEnd);
+                currentShape.getRendererService().render(drawingView.getGraphics(), currentShape, true);
+            }
+
+            // Then draw the new preview
             end = e.getPoint();
-            currentShape.setEnd(end); // Just update endpoint for preview
+            currentShape.setEnd(end);
             currentShape.getRendererService().render(drawingView.getGraphics(), currentShape, true);
+
+            // Store current end as previous for next iteration
+            previousEnd = end;
         }
     }
 
