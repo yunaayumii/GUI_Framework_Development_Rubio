@@ -8,6 +8,8 @@ public class CommandService {
     public static void ExecuteCommand(Command command) {
         command.execute();
         undoStack.push(command);
+        redoStack.clear(); // Clear redo stack when new command is executed
+        System.out.println("Added to undoStack: " + command.getClass().getSimpleName() + " - " + command);
     }
 
     public static void undo() {
@@ -16,6 +18,7 @@ public class CommandService {
         Command command = undoStack.pop();
         command.undo();
         redoStack.push(command);
+        System.out.println("Moved to redoStack: " + command.getClass().getSimpleName() + " - " + command);
     }
 
     public static void redo() {
@@ -24,5 +27,14 @@ public class CommandService {
         Command command = redoStack.pop();
         command.execute();
         undoStack.push(command);
+        System.out.println("Redone and added to undoStack: " + command.getClass().getSimpleName() + " - " + command);
+    }
+
+    public static boolean canUndo() {
+        return !undoStack.empty();
+    }
+
+    public static boolean canRedo() {
+        return !redoStack.empty();
     }
 }

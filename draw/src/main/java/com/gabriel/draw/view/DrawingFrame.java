@@ -1,6 +1,5 @@
 package com.gabriel.draw.view;
 
-import com.gabriel.draw.component.DrawingMenuBar;
 import com.gabriel.draw.controller.DrawingWindowController;
 import com.gabriel.drawfx.service.AppService;
 
@@ -13,8 +12,5 @@ public class DrawingFrame extends JFrame {
         this.addWindowListener(drawingWindowController);
         this.addWindowFocusListener(drawingWindowController);
         this.addWindowStateListener(drawingWindowController);
-
-        DrawingView drawingView = new DrawingView(appService);
-        this.getContentPane().add(drawingView);
     }
 }

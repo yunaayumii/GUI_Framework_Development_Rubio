@@ -1,6 +1,5 @@
 package com.gabriel.draw.view;
 
-import com.gabriel.draw.controller.DrawingController;
 import com.gabriel.drawfx.model.Drawing;
 import com.gabriel.drawfx.model.Shape;
 import com.gabriel.drawfx.service.AppService;

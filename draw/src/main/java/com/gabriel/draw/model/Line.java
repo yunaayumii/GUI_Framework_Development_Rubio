@@ -2,7 +2,6 @@ package com.gabriel.draw.model;
 
 
 import com.gabriel.draw.service.LineRendererService;
-import lombok.Data;
 import com.gabriel.drawfx.model.Shape;
 import java.awt.*;
 

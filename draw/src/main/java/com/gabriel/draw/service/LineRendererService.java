@@ -13,10 +13,18 @@ public class LineRendererService implements RendererService {
     public void render(Graphics g, Shape shape, boolean xor) {
         Line line = (Line) shape;
         if(xor) {
-            g.setXORMode(shape.getColor());
+            g.setXORMode(Color.WHITE);
         }
         else {
-            g.setColor(shape.getColor());
+            g.setPaintMode();
+
+            Color drawColor;
+            if (shape.getColor() != null) {
+                drawColor = shape.getColor();
+            } else {
+                drawColor = Color.BLACK;
+            }
+            g.setColor(drawColor);
         }
         g.drawLine(line.getLocation().x, line.getLocation().y, line.getEnd().x, line.getEnd().y);
     }

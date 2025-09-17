@@ -13,21 +13,39 @@ import java.awt.*;
 
 public class DeawingCommandAppService implements AppService {
     public AppService appService;
+    private static JToolBar toolBar;
+    private static JMenuBar menuBar;
+
     public DeawingCommandAppService(AppService appService){
         this.appService = appService;
+    }
 
+    public static void setUIComponents(JToolBar toolbar, JMenuBar menubar) {
+        toolBar = toolbar;
+        menuBar = menubar;
+    }
+
+    private void updateButtonStates() {
+        if (toolBar instanceof com.gabriel.draw.view.DrawingToolBar) {
+            ((com.gabriel.draw.view.DrawingToolBar) toolBar).updateButtonStates();
+        }
+        if (menuBar instanceof com.gabriel.draw.view.DrawingMenuBar) {
+            ((com.gabriel.draw.view.DrawingMenuBar) menuBar).updateMenuStates();
+        }
     }
 
     @Override
     public void undo() {
         CommandService.undo();
         appService.repaint();
+        updateButtonStates();
     }
 
     @Override
     public void redo() {
         CommandService.redo();
         appService.repaint();
+        updateButtonStates();
     }
 
     @Override
@@ -39,6 +57,7 @@ public class DeawingCommandAppService implements AppService {
     public void setShapeMode(ShapeMode shapeMode) {
         Command command = new setShapeModeCommand(appService, shapeMode);
         CommandService.ExecuteCommand(command);
+        updateButtonStates();
     }
 
     @Override
@@ -60,6 +79,7 @@ public class DeawingCommandAppService implements AppService {
     public void setColor(Color color) {
         Command command = new setColorCommand(appService, color);
         CommandService.ExecuteCommand(command);
+        updateButtonStates();
     }
 
     @Override
@@ -71,28 +91,35 @@ public class DeawingCommandAppService implements AppService {
     public void setFill(Color color) {
         Command command = new setFillCommand(appService, color);
         CommandService.ExecuteCommand(command);
+        updateButtonStates();
     }
 
     @Override
     public void move(Shape shape, Point newLoc) {
-        appService.move(shape,newLoc);
+        Command command = new moveCommand(appService, shape, newLoc);
+        CommandService.ExecuteCommand(command);
+        updateButtonStates();
     }
 
     @Override
     public void scale(Shape shape, Point newEnd) {
-        appService.scale(shape,newEnd);
+        Command command = new scaleCommand(appService, shape, newEnd);
+        CommandService.ExecuteCommand(command);
+        updateButtonStates();
     }
 
     @Override
     public void create(Shape shape) {
         Command command = new AddShapeCommand(appService, shape);
         CommandService.ExecuteCommand(command);
+        updateButtonStates();
     }
 
     @Override
     public void delete(Shape shape) {
         Command command = new DeleteShapeCommand(appService, shape);
         CommandService.ExecuteCommand(command);
+        updateButtonStates();
     }
 
     @Override
