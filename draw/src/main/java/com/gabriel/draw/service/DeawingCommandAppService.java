@@ -146,4 +146,18 @@ public class DeawingCommandAppService implements AppService {
     public void repaint() {
         appService.repaint();
     }
+
+    @Override
+    public int getSearchRadius() {
+        return 0;
+    }
+
+    @Override
+    public void setSearchRadius(int radius) {
+    }
+
+    @Override
+    public void search(Point p) {
+
+    }
 }

@@ -132,4 +132,17 @@ public class DrawingAppService implements AppService {
     public void repaint() {
         drawingView.repaint();
     }
+
+    @Override
+    public int getSearchRadius() {
+        return 0;
+    }
+
+    @Override
+    public void setSearchRadius(int radius) {
+
+    }
+    @Override
+    public void search(Point p) {
+    }
 }

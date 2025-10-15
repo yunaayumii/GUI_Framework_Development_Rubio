@@ -33,6 +33,12 @@ public interface AppService {
 
     Object getModel();
     JPanel getView();
+
     void setView(JPanel panel);
     void repaint();
+
+    int getSearchRadius();
+    void setSearchRadius(int radius);
+
+    void search(Point p);
 }
