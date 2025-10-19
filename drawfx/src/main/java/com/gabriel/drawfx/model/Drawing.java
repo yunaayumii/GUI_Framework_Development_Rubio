@@ -15,6 +15,8 @@ public class Drawing {
     private ShapeMode shapeMode = ShapeMode.Rectangle;
     private DrawMode drawMode = DrawMode.Idle;
     List<Shape> shapes;
+    // selectedShape will hold the Shape that is being selected. added for selection support.
+    private Shape selectedShape;
     public Drawing(){
         shapes = new ArrayList<>();
     }

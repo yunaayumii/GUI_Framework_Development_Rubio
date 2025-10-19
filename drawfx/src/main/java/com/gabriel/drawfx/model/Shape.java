@@ -17,4 +17,7 @@ public abstract class Shape {
         this.setEnd(location);
   }
 
+    // add a "contains" function for Shapes, and will override it later on for all the shapes.
+    public abstract boolean contains(Point p, int tolerance);
+
 }
