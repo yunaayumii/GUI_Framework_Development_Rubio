@@ -100,12 +100,18 @@ public class DrawingAppService implements AppService {
         }
 
         this.drawing.getShapes().add(shape);
+        // make newly created shape selected (small convenience)
+        drawing.setSelectedShape(shape);
         repaint();
     }
 
     @Override
     public void delete(Shape shape) {
         drawing.getShapes().remove(shape);
+        // if deleted shape was selected, clear selection
+        if (drawing.getSelectedShape() == shape) {
+            drawing.setSelectedShape(null);
+        }
     }
 
     @Override

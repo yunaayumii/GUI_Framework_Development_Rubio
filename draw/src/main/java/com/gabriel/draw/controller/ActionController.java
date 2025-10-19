@@ -32,6 +32,10 @@ public class ActionController implements ActionListener {
         else if(e.getActionCommand().equals(ActionCommand.ELLIPSE)) {
             appService.setShapeMode(ShapeMode.Ellipse);
         }
+        //added select feature in controller
+        else if(e.getActionCommand().equals(ActionCommand.SELECT)) {
+            appService.setShapeMode(ShapeMode.Select);
+        }
         else if(e.getActionCommand().equals(ActionCommand.COLOR)) {
             Color selectedColor = JColorChooser.showDialog(null, "Choose a color", Color.WHITE);
             if (selectedColor != null) {

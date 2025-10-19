@@ -7,6 +7,7 @@ import com.gabriel.drawfx.DrawMode;
 import com.gabriel.draw.view.DrawingView;
 import com.gabriel.drawfx.service.AppService;
 import com.gabriel.drawfx.model.Shape;
+import com.gabriel.drawfx.ShapeMode;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
