@@ -46,6 +46,12 @@ public class DrawingAppService implements AppService {
 
     @Override
     public void setShapeMode(ShapeMode shapeMode) {
+        // clear selection when switching to a drawing mode
+        if (shapeMode != ShapeMode.Select && drawing.getSelectedShape() != null) {
+            drawing.getSelectedShape().setSelected(false);
+            drawing.setSelectedShape(null);
+            repaint();
+        }
         drawing.setShapeMode(shapeMode);
     }
 
