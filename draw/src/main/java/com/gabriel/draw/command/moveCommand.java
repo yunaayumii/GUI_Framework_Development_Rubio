@@ -16,22 +16,26 @@ public class moveCommand implements Command {
         this.appService = appService;
         this.shape = shape;
         this.newLoc = newLoc;
+        // save current location for undo
         this.prevLoc = shape.getLocation();
     }
 
     @Override
     public void execute() {
+        // capture current before moving in case shape was changed elsewhere
         prevLoc = shape.getLocation();
-        shape.setLocation(newLoc);
+        appService.move(shape, newLoc);
     }
 
     @Override
     public void undo() {
-        shape.setLocation(prevLoc);
+        // move back to previous location via service (keeps size and end consistent)
+        appService.move(shape, prevLoc);
     }
 
     @Override
     public void redo() {
-        shape.setLocation(newLoc);
+        // move again to target location via service
+        appService.move(shape, newLoc);
     }
 }
