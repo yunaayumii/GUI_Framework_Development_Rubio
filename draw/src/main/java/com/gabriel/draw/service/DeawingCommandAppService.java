@@ -158,6 +158,10 @@ public class DeawingCommandAppService implements AppService {
 
     @Override
     public void search(Point p) {
+    }
 
+    @Override
+    public void selectShape(Point p) {
+        appService.selectShape(p);
     }
 }
