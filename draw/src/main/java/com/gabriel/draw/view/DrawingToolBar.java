@@ -12,6 +12,7 @@ public class DrawingToolBar extends JToolBar {
     private final JButton lineButton = new JButton();
     private final JButton rectangleButton = new JButton();
     private final JButton ellipseButton = new JButton();
+    private final JButton selectButton = new JButton();  // New Select button
     private final JButton colorButton = new JButton();
     private final JButton fillColorButton = new JButton();
     private final JButton undoButton = new JButton();
@@ -35,6 +36,14 @@ public class DrawingToolBar extends JToolBar {
         ellipseButton.setActionCommand(ActionCommand.ELLIPSE);
         ellipseButton.setToolTipText("Draw Ellipse");
         add(ellipseButton);
+
+        addSeparator(); // Visual separator
+
+        // add Select button
+        selectButton.addActionListener(actionListener);
+        selectButton.setActionCommand(ActionCommand.SELECT);
+        selectButton.setToolTipText("Select Shape");
+        add(selectButton);
 
         addSeparator(); // Visual separator
 
@@ -87,6 +96,11 @@ public class DrawingToolBar extends JToolBar {
         imgLocation = "images/" + redoImageName + ".png";
         URL redoImageURL = DrawingToolBar.class.getResource(imgLocation);
         redoButton.setIcon(new ImageIcon(redoImageURL, "redo"));
+
+        String selectImageName = "select";
+        imgLocation = "images/" + selectImageName + ".png";
+        URL selectImageURL = DrawingToolBar.class.getResource(imgLocation);
+        selectButton.setIcon(new ImageIcon(selectImageURL, "select"));  // Fixed: was colorButton
 
         String colorImageName = "color";
         imgLocation = "images/" + colorImageName + ".png";
