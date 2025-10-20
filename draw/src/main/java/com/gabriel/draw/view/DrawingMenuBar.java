@@ -19,6 +19,7 @@ public class DrawingMenuBar extends JMenuBar {
     private final JMenuItem rectangleMenuItem = new JMenuItem("Rectangle");
     private final JMenuItem ellipseMenuItem = new JMenuItem("Ellipse");
     private final JMenuItem selectMenuItem = new JMenuItem("Select");  // new Select menu item
+    private final JMenuItem moveMenuItem = new JMenuItem("Move");     // new Move menu item
     private final JMenuItem chooseColorItem = new JMenuItem("Choose Color");
     private final JMenuItem fillColorItem = new JMenuItem("Fill Color");
     private final JMenuItem undoMenuItem = new JMenuItem("Undo");
@@ -56,6 +57,9 @@ public class DrawingMenuBar extends JMenuBar {
         drawMenu.add(selectMenuItem); // select
         selectMenuItem.addActionListener(actionListener);
         selectMenuItem.setActionCommand(ActionCommand.SELECT);
+        drawMenu.add(moveMenuItem); // move
+        moveMenuItem.addActionListener(actionListener);
+        moveMenuItem.setActionCommand(ActionCommand.MOVE);
 
         JMenu colorMenu = new JMenu("Color");
         colorMenu.setMnemonic(KeyEvent.VK_C);
