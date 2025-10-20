@@ -41,4 +41,5 @@ public interface AppService {
     void setSearchRadius(int radius);
 
     void search(Point p);
+    void selectShape(Point p);  // selectShape feature
 }
