@@ -46,11 +46,13 @@ public class DrawingAppService implements AppService {
 
     @Override
     public void setShapeMode(ShapeMode shapeMode) {
-        // clear selection when switching to a drawing mode
-        if (shapeMode != ShapeMode.Select && drawing.getSelectedShape() != null) {
-            drawing.getSelectedShape().setSelected(false);
-            drawing.setSelectedShape(null);
-            repaint();
+        // Keep selection when switching to Select or Move modes, clear it when switching to a drawing mode
+        if (shapeMode == ShapeMode.Line || shapeMode == ShapeMode.Rectangle || shapeMode == ShapeMode.Ellipse) {
+            if (drawing.getSelectedShape() != null) {
+                drawing.getSelectedShape().setSelected(false);
+                drawing.setSelectedShape(null);
+                repaint();
+            }
         }
         drawing.setShapeMode(shapeMode);
     }
@@ -87,7 +89,10 @@ public class DrawingAppService implements AppService {
 
     @Override
     public void move(Shape shape, Point newLoc) {
-        moverService.move(shape, newLoc);}
+        moverService.move(shape, newLoc);
+        // repaint so the move is visible immediately
+        repaint();
+    }
 
     @Override
     public void scale(Shape shape, Point newEnd) {
