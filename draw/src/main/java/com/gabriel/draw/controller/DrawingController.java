@@ -36,6 +36,13 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
         Point start;
         if(appService.getDrawMode() == DrawMode.Idle) {
             start = e.getPoint();
+
+            // controller logic for when select mode is selected
+            if (appService.getShapeMode() == ShapeMode.Select) {
+                appService.selectShape(start);
+                return;
+            }
+
             previousEnd = start; // Initialize previous end to start point
             switch (appService.getShapeMode()){
                 case Line:  currentShape = new Line(start, start);

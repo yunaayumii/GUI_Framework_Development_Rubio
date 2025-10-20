@@ -12,6 +12,8 @@ public abstract class Shape {
     private Color color;
     private Color fill;
     private RendererService rendererService;
+    private boolean selected = false;  // track selection state of the shape
+
     public Shape(Point location){
         this.setLocation(location);
         this.setEnd(location);
