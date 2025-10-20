@@ -47,6 +47,10 @@ public class EllipseRendererService implements RendererService {
             g.setColor(Color.BLUE);
             int handleSize = 6;
 
+            // draw dotted border around bounding box
+            drawSelectionBorder(g, x, y, width, height);
+
+            // draw handles at all 4 corners of bounding box
             drawHandle(g, new Point(x, y), handleSize);                    // Top-left
             drawHandle(g, new Point(x + width, y), handleSize);            // Top-right
             drawHandle(g, new Point(x, y + height), handleSize);           // Bottom-left

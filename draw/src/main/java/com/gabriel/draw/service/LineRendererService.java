@@ -12,10 +12,9 @@ public class LineRendererService implements RendererService {
     @Override
     public void render(Graphics g, Shape shape, boolean xor) {
         Line line = (Line) shape;
-        if(xor) {
+        if (xor) {
             g.setXORMode(Color.WHITE);
-        }
-        else {
+        } else {
             g.setPaintMode();
 
             Color drawColor;
@@ -32,6 +31,15 @@ public class LineRendererService implements RendererService {
         if (!xor && shape.isSelected()) {
             g.setColor(Color.BLUE);
             int handleSize = 6;
+
+            // draw dotted border box around the line
+            int minX = Math.min(line.getLocation().x, line.getEnd().x);
+            int minY = Math.min(line.getLocation().y, line.getEnd().y);
+            int maxX = Math.max(line.getLocation().x, line.getEnd().x);
+            int maxY = Math.max(line.getLocation().y, line.getEnd().y);
+            drawSelectionBorder(g, minX, minY, maxX - minX, maxY - minY);
+
+            // draw handles at endpoints
             drawHandle(g, line.getLocation(), handleSize);
             drawHandle(g, line.getEnd(), handleSize);
         }
