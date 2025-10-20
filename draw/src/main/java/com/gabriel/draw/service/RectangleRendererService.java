@@ -13,21 +13,20 @@ public class RectangleRendererService implements RendererService {
 
         int x = shape.getLocation().x;
         int y = shape.getLocation().y;
-        int width = shape.getEnd().x-shape.getLocation().x;
-        int height = shape.getEnd().y-shape.getLocation().y;
-        if(width < 0) {
+        int width = shape.getEnd().x - shape.getLocation().x;
+        int height = shape.getEnd().y - shape.getLocation().y;
+        if (width < 0) {
             x = shape.getEnd().x;
             width = -width;
         }
-        if(height < 0) {
-            y = shape.getEnd().y ;
+        if (height < 0) {
+            y = shape.getEnd().y;
             height = -height;
         }
 
-        if(xor) {
+        if (xor) {
             g.setXORMode(Color.WHITE);
-        }
-        else {
+        } else {
             g.setPaintMode();
 
             if (shape.getFill() != null) {
@@ -44,5 +43,16 @@ public class RectangleRendererService implements RendererService {
             g.setColor(drawColor);
         }
         g.drawRect(x, y, width, height);
+
+        // draw selection handles if shape is selected
+        if (!xor && shape.isSelected()) {
+            g.setColor(Color.BLUE);
+            int handleSize = 6;
+
+            drawHandle(g, new Point(x, y), handleSize);                    // Top-left
+            drawHandle(g, new Point(x + width, y), handleSize);            // Top-right
+            drawHandle(g, new Point(x, y + height), handleSize);           // Bottom-left
+            drawHandle(g, new Point(x + width, y + height), handleSize);   // Bottom-right
+        }
     }
 }

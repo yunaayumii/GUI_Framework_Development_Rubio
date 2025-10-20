@@ -27,5 +27,13 @@ public class LineRendererService implements RendererService {
             g.setColor(drawColor);
         }
         g.drawLine(line.getLocation().x, line.getLocation().y, line.getEnd().x, line.getEnd().y);
+
+        // draw selection handles if shape is selected
+        if (!xor && shape.isSelected()) {
+            g.setColor(Color.BLUE);
+            int handleSize = 6;
+            drawHandle(g, line.getLocation(), handleSize);
+            drawHandle(g, line.getEnd(), handleSize);
+        }
     }
 }

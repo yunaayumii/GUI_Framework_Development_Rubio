@@ -1,6 +1,6 @@
 package com.gabriel.draw.model;
 
-import com.gabriel.draw.service.EllipseRenderer;
+import com.gabriel.draw.service.EllipseRendererService;
 import com.gabriel.drawfx.model.Shape;
 
 import java.awt.*;
@@ -10,7 +10,7 @@ public class Ellipse extends Shape {
         super(start);
         this.setEnd(end);
         this.setColor(Color.RED);
-        this.setRendererService(new EllipseRenderer());
+        this.setRendererService(new EllipseRendererService());
     }
 
     @Override
