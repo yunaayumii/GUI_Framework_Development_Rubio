@@ -27,8 +27,8 @@ public class LineRendererService implements RendererService {
         }
         g.drawLine(line.getLocation().x, line.getLocation().y, line.getEnd().x, line.getEnd().y);
 
-        // draw selection handles if shape is selected
-        if (!xor && shape.isSelected()) {
+        // draw selection handles if shape is selected (also in xor mode during move preview)
+        if (shape.isSelected()) {
             g.setColor(Color.BLUE);
             int handleSize = 6;
 

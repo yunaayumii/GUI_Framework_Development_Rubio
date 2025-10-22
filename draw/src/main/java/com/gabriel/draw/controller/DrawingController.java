@@ -89,11 +89,6 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
             if (appService.getShapeMode() == ShapeMode.Move) {
                 Shape selectedShape = appService.getSelectedShape();
                 if (selectedShape != null) {
-                    // erase the last xor preview if it exists
-                    if (previousMovePreview != null) {
-                        appService.renderMovePreview(drawingView.getGraphics(), selectedShape, previousMovePreview);
-                    }
-
                     // calculate final location using the anchor offset
                     Point finalLoc = new Point(end.x - anchorOffset.x, end.y - anchorOffset.y);
                     appService.move(selectedShape, finalLoc);

@@ -42,7 +42,7 @@ public final class MoverService {
             shape.setEnd(new Point(origEnd.x + dx, origEnd.y + dy));
         }
 
-        // render in xor mode
+        // render in xor mode so it can erase itself when redrawn
         shape.getRendererService().render(g, shape, true);
 
         // restore original location
