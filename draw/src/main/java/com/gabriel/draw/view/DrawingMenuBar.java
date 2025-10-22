@@ -26,6 +26,10 @@ public class DrawingMenuBar extends JMenuBar {
     private final JMenuItem undoMenuItem = new JMenuItem("Undo");
     private final JMenuItem redoMenuItem = new JMenuItem("Redo");
 
+    public void setAppService(AppService appService) {
+        this.appService = appService;
+    }
+
 
     public DrawingMenuBar(ActionListener actionListener) {
         super();
@@ -82,5 +86,12 @@ public class DrawingMenuBar extends JMenuBar {
     public void updateMenuStates() {
         undoMenuItem.setEnabled(CommandService.canUndo());
         redoMenuItem.setEnabled(CommandService.canRedo());
+
+        // check if a shape is selected
+        boolean hasSelection = (appService != null && appService.getSelectedShape() != null);
+
+        // disable Move and Scale menu items if no shape is selected
+        moveMenuItem.setEnabled(hasSelection);
+        scaleMenuItem.setEnabled(hasSelection);
     }
 }

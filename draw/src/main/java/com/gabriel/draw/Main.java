@@ -23,6 +23,7 @@ public class Main {
         DrawingFrame drawingFrame = new DrawingFrame(appService);
         ActionListener actionListener = new ActionController(appService);
         DrawingMenuBar drawingMenuBar = new DrawingMenuBar( actionListener);
+        drawingMenuBar.setAppService(appService); // Set the appService so menu can check selection state
         DrawingToolBar drawingToolBar = new DrawingToolBar(actionListener, appService);
         DrawingView drawingView = new DrawingView(appService);
         DrawingController drawingController = new DrawingController(appService, drawingView);

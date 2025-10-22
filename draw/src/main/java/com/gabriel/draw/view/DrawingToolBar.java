@@ -150,6 +150,13 @@ public class DrawingToolBar extends JToolBar {
         undoButton.setEnabled(CommandService.canUndo());
         redoButton.setEnabled(CommandService.canRedo());
 
+        // check if a shape is selected
+        boolean hasSelection = (appService != null && appService.getSelectedShape() != null);
+
+        // disable Move and Scale buttons if no shape is selected
+        moveButton.setEnabled(hasSelection);
+        scaleButton.setEnabled(hasSelection);
+
         // update tool button states to show which is active
         if (appService != null) {
             ShapeMode currentMode = appService.getShapeMode();
