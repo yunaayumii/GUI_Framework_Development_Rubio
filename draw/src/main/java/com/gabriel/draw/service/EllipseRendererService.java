@@ -50,11 +50,15 @@ public class EllipseRendererService implements RendererService {
             // draw dotted border around bounding box
             drawSelectionBorder(g, x, y, width, height);
 
-            // draw handles at all 4 corners of bounding box
-            drawHandle(g, new Point(x, y), handleSize);                    // Top-left
-            drawHandle(g, new Point(x + width, y), handleSize);            // Top-right
-            drawHandle(g, new Point(x, y + height), handleSize);           // Bottom-left
-            drawHandle(g, new Point(x + width, y + height), handleSize);   // Bottom-right
+            // draw handles at all 8 positions (4 corners + 4 middles)
+            drawHandle(g, new Point(x, y), handleSize);                           // upper left
+            drawHandle(g, new Point(x + width, y), handleSize);                   // upper right
+            drawHandle(g, new Point(x, y + height), handleSize);                  // lower left
+            drawHandle(g, new Point(x + width, y + height), handleSize);          // lower right
+            drawHandle(g, new Point(x + width/2, y), handleSize);                 // middle top
+            drawHandle(g, new Point(x + width/2, y + height), handleSize);        // middle bottom
+            drawHandle(g, new Point(x, y + height/2), handleSize);                // middle left
+            drawHandle(g, new Point(x + width, y + height/2), handleSize);        // middle right
         }
     }
 }

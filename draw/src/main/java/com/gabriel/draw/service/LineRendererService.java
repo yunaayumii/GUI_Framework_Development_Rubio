@@ -37,11 +37,20 @@ public class LineRendererService implements RendererService {
             int minY = Math.min(line.getLocation().y, line.getEnd().y);
             int maxX = Math.max(line.getLocation().x, line.getEnd().x);
             int maxY = Math.max(line.getLocation().y, line.getEnd().y);
-            drawSelectionBorder(g, minX, minY, maxX - minX, maxY - minY);
+            int width = maxX - minX;
+            int height = maxY - minY;
 
-            // draw handles at endpoints
-            drawHandle(g, line.getLocation(), handleSize);
-            drawHandle(g, line.getEnd(), handleSize);
+            drawSelectionBorder(g, minX, minY, width, height);
+
+            // draw handles at all 8 positions (4 corners + 4 middles)
+            drawHandle(g, new Point(minX, minY), handleSize);                           // upper left
+            drawHandle(g, new Point(maxX, minY), handleSize);                           // upper right
+            drawHandle(g, new Point(minX, maxY), handleSize);                           // lower left
+            drawHandle(g, new Point(maxX, maxY), handleSize);                           // lower right
+            drawHandle(g, new Point(minX + width/2, minY), handleSize);                 // middle top
+            drawHandle(g, new Point(minX + width/2, maxY), handleSize);                 // middle bottom
+            drawHandle(g, new Point(minX, minY + height/2), handleSize);                // middle left
+            drawHandle(g, new Point(maxX, minY + height/2), handleSize);                // middle right
         }
     }
 }
