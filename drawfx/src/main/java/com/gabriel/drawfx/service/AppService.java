@@ -42,4 +42,9 @@ public interface AppService {
 
     void search(Point p);
     void selectShape(Point p);  // selectShape feature
+
+    Shape getSelectedShape();  // get the currently selected shape
+
+    // render move preview using xor mode
+    void renderMovePreview(Graphics g, Shape shape, Point previewLoc);
 }

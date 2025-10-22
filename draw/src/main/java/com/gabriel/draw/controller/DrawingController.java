@@ -15,11 +15,16 @@ import java.awt.event.MouseMotionListener;
 
 public class DrawingController  implements MouseListener, MouseMotionListener {
     private Point end;
-    private Point previousEnd; // Track previous end point for XOR erasing
+    private Point previousEnd; // track previous end point for xor erasing
     final private DrawingView drawingView;
 
     Shape currentShape;
     AppService appService;
+
+    // for move operation tracking
+    private Point anchorOffset; // offset from shape location to where user clicked
+    private Point previousMovePreview; // track previous preview location for xor erase
+
      public DrawingController(AppService appService, DrawingView drawingView){
        this.appService = appService;
          this.drawingView = drawingView;
@@ -43,7 +48,21 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
                 return;
             }
 
-            previousEnd = start; // Initialize previous end to start point
+            // when move is selected
+            if (appService.getShapeMode() == ShapeMode.Move) {
+                Shape selectedShape = appService.getSelectedShape();
+                if (selectedShape != null) {
+                    // calculate offset so shape doesn't jump to cursor position
+                    // anchorOffset = where we clicked - shape's current location
+                    Point loc = selectedShape.getLocation();
+                    anchorOffset = new Point(start.x - loc.x, start.y - loc.y);
+                    previousMovePreview = null; // no preview yet
+                    appService.setDrawMode(DrawMode.MousePressed);
+                }
+                return;
+            }
+
+            previousEnd = start; // initialize previous end to start point
             switch (appService.getShapeMode()){
                 case Line:  currentShape = new Line(start, start);
                     break;
@@ -54,7 +73,7 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
                     currentShape = new Ellipse(start, start);
                     break;
             }
-            // Set shape color to currently selected color
+            // set shape color to currently selected color
             currentShape.setColor(appService.getColor());
             currentShape.getRendererService().render(drawingView.getGraphics(), currentShape,false );
             appService.setDrawMode(DrawMode.MousePressed);
@@ -65,7 +84,28 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
     public void mouseReleased(MouseEvent e) {
         if(appService.getDrawMode() == DrawMode.MousePressed){
             end = e.getPoint();
-            appService.create(currentShape); // Only push to stack here
+
+            // if in move mode, commit the move
+            if (appService.getShapeMode() == ShapeMode.Move) {
+                Shape selectedShape = appService.getSelectedShape();
+                if (selectedShape != null) {
+                    // erase the last xor preview if it exists
+                    if (previousMovePreview != null) {
+                        appService.renderMovePreview(drawingView.getGraphics(), selectedShape, previousMovePreview);
+                    }
+
+                    // calculate final location using the anchor offset
+                    Point finalLoc = new Point(end.x - anchorOffset.x, end.y - anchorOffset.y);
+                    appService.move(selectedShape, finalLoc);
+
+                    // cleanup
+                    anchorOffset = null;
+                    previousMovePreview = null;
+                }
+            } else {
+                appService.create(currentShape); // only push to stack here
+            }
+
             appService.setDrawMode(DrawMode.Idle);
         }
     }
@@ -83,18 +123,40 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         if(appService.getDrawMode() == DrawMode.MousePressed) {
-            // First, erase the previous preview by drawing it again in XOR mode
+            // handle move mode with xor preview
+            if (appService.getShapeMode() == ShapeMode.Move) {
+                Shape selectedShape = appService.getSelectedShape();
+                if (selectedShape != null && anchorOffset != null) {
+                    // erase previous xor preview if exists
+                    if (previousMovePreview != null) {
+                        appService.renderMovePreview(drawingView.getGraphics(), selectedShape, previousMovePreview);
+                    }
+
+                    // calculate new preview location maintaining the anchor offset
+                    Point newPreviewLoc = new Point(e.getPoint().x - anchorOffset.x,
+                                                     e.getPoint().y - anchorOffset.y);
+
+                    // draw new xor preview
+                    appService.renderMovePreview(drawingView.getGraphics(), selectedShape, newPreviewLoc);
+
+                    // remember this preview location for next erase
+                    previousMovePreview = newPreviewLoc;
+                }
+                return;
+            }
+
+            // first, erase the previous preview by drawing it again in xor mode
             if (previousEnd != null) {
                 currentShape.setEnd(previousEnd);
                 currentShape.getRendererService().render(drawingView.getGraphics(), currentShape, true);
             }
 
-            // Then draw the new preview
+            // then draw the new preview
             end = e.getPoint();
             currentShape.setEnd(end);
             currentShape.getRendererService().render(drawingView.getGraphics(), currentShape, true);
 
-            // Store current end as previous for next iteration
+            // store current end as previous for next iteration
             previousEnd = end;
         }
     }

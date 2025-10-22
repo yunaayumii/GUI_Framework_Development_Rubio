@@ -164,4 +164,14 @@ public class DeawingCommandAppService implements AppService {
     public void selectShape(Point p) {
         appService.selectShape(p);
     }
+
+    @Override
+    public Shape getSelectedShape() {
+        return appService.getSelectedShape();
+    }
+
+    @Override
+    public void renderMovePreview(Graphics g, Shape shape, Point previewLoc) {
+        appService.renderMovePreview(g, shape, previewLoc);
+    }
 }

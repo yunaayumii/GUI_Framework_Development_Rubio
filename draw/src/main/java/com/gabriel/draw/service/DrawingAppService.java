@@ -171,4 +171,14 @@ public class DrawingAppService implements AppService {
         selectService.selectShape(drawing, p);
         repaint();
     }
+
+    @Override
+    public Shape getSelectedShape() {
+        return drawing.getSelectedShape();
+    }
+
+    @Override
+    public void renderMovePreview(Graphics g, Shape shape, Point previewLoc) {
+        moverService.renderMovePreview(g, shape, previewLoc);
+    }
 }
