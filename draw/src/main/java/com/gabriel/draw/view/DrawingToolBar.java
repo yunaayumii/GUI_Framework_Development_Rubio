@@ -1,7 +1,9 @@
 package com.gabriel.draw.view;
 
 import com.gabriel.drawfx.ActionCommand;
+import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.command.CommandService;
+import com.gabriel.drawfx.service.AppService;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -20,8 +22,11 @@ public class DrawingToolBar extends JToolBar {
     private final JButton undoButton = new JButton();
     private final JButton redoButton = new JButton();
 
-    public DrawingToolBar(ActionListener actionListener){
+    private AppService appService; // track app service to get current mode
+
+    public DrawingToolBar(ActionListener actionListener, AppService appService){
         super();
+        this.appService = appService;
 
         // Add drawing shape buttons
         lineButton.addActionListener(actionListener);
@@ -141,7 +146,43 @@ public class DrawingToolBar extends JToolBar {
     }
 
     public void updateButtonStates() {
+        // update undo/redo button states
         undoButton.setEnabled(CommandService.canUndo());
         redoButton.setEnabled(CommandService.canRedo());
+
+        // update tool button states to show which is active
+        if (appService != null) {
+            ShapeMode currentMode = appService.getShapeMode();
+
+            // reset all tool buttons to not selected
+            lineButton.setSelected(false);
+            rectangleButton.setSelected(false);
+            ellipseButton.setSelected(false);
+            selectButton.setSelected(false);
+            moveButton.setSelected(false);
+            scaleButton.setSelected(false);
+
+            // set the current mode button as selected
+            switch (currentMode) {
+                case Line:
+                    lineButton.setSelected(true);
+                    break;
+                case Rectangle:
+                    rectangleButton.setSelected(true);
+                    break;
+                case Ellipse:
+                    ellipseButton.setSelected(true);
+                    break;
+                case Select:
+                    selectButton.setSelected(true);
+                    break;
+                case Move:
+                    moveButton.setSelected(true);
+                    break;
+                case Scale:
+                    scaleButton.setSelected(true);
+                    break;
+            }
+        }
     }
 }
