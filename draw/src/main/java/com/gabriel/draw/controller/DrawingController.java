@@ -5,6 +5,7 @@ import com.gabriel.draw.model.Line;
 import com.gabriel.draw.model.Rectangle;
 import com.gabriel.drawfx.DrawMode;
 import com.gabriel.draw.view.DrawingView;
+import com.gabriel.drawfx.SelectionMode;
 import com.gabriel.drawfx.service.AppService;
 import com.gabriel.drawfx.model.Shape;
 import com.gabriel.drawfx.ShapeMode;
@@ -24,6 +25,10 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
     // for move operation tracking
     private Point anchorOffset; // offset from shape location to where user clicked
     private Point previousMovePreview; // track previous preview location for xor erase
+
+    // for scale operation tracking
+    private SelectionMode scaleMode; // which handle is being dragged
+    private Point previousScalePreview; // track previous preview point for xor erase
 
      public DrawingController(AppService appService, DrawingView drawingView){
        this.appService = appService;
@@ -62,6 +67,20 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
                 return;
             }
 
+            // when scale is selected
+            if (appService.getShapeMode() == ShapeMode.Scale) {
+                Shape selectedShape = appService.getSelectedShape();
+                if (selectedShape != null) {
+                    // determine which scale handle (if any) was clicked
+                    scaleMode = appService.getScaleHandleAt(selectedShape, start);
+                    if (scaleMode != SelectionMode.None) {
+                        previousScalePreview = null; // no preview yet
+                        appService.setDrawMode(DrawMode.MousePressed);
+                    }
+                }
+                return;
+            }
+
             previousEnd = start; // initialize previous end to start point
             switch (appService.getShapeMode()){
                 case Line:  currentShape = new Line(start, start);
@@ -96,6 +115,16 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
                     // cleanup
                     anchorOffset = null;
                     previousMovePreview = null;
+                }
+            } else if (appService.getShapeMode() == ShapeMode.Scale) {
+                // if in scale mode, commit the scale
+                Shape selectedShape = appService.getSelectedShape();
+                if (selectedShape != null && scaleMode != SelectionMode.None) {
+                    appService.scaleShape(selectedShape, end, scaleMode);
+
+                    // cleanup
+                    scaleMode = SelectionMode.None;
+                    previousScalePreview = null;
                 }
             } else {
                 appService.create(currentShape); // only push to stack here
@@ -136,6 +165,29 @@ public class DrawingController  implements MouseListener, MouseMotionListener {
 
                     // remember this preview location for next erase
                     previousMovePreview = newPreviewLoc;
+                }
+                return;
+            }
+
+            // handle scale mode with xor preview
+            if (appService.getShapeMode() == ShapeMode.Scale) {
+                Shape selectedShape = appService.getSelectedShape();
+                if (selectedShape != null && scaleMode != SelectionMode.None) {
+                    // erase previous xor preview if exists
+                    if (previousScalePreview != null) {
+                        appService.renderScalePreview(drawingView.getGraphics(), selectedShape,
+                                                      previousScalePreview, scaleMode);
+                    }
+
+                    // get new preview point
+                    Point newPreviewPoint = e.getPoint();
+
+                    // draw new xor preview
+                    appService.renderScalePreview(drawingView.getGraphics(), selectedShape,
+                                                  newPreviewPoint, scaleMode);
+
+                    // remember this preview point for next erase
+                    previousScalePreview = newPreviewPoint;
                 }
                 return;
             }

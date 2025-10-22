@@ -1,6 +1,7 @@
 package com.gabriel.drawfx.service;
 
 import com.gabriel.drawfx.DrawMode;
+import com.gabriel.drawfx.SelectionMode;
 import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.model.Shape;
 
@@ -47,4 +48,9 @@ public interface AppService {
 
     // render move preview using xor mode
     void renderMovePreview(Graphics g, Shape shape, Point previewLoc);
+
+    // scaling-related methods
+    SelectionMode getScaleHandleAt(Shape shape, Point p);  // determine which scale handle is clicked
+    void scaleShape(Shape shape, Point newPoint, SelectionMode mode);  // scale shape using specific handle
+    void renderScalePreview(Graphics g, Shape shape, Point newPoint, SelectionMode mode);  // render scale preview
 }

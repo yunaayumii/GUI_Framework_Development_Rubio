@@ -1,6 +1,7 @@
 package com.gabriel.draw.service;
 
 import com.gabriel.drawfx.DrawMode;
+import com.gabriel.drawfx.SelectionMode;
 import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.model.Drawing;
 import com.gabriel.drawfx.model.Shape;
@@ -180,5 +181,22 @@ public class DrawingAppService implements AppService {
     @Override
     public void renderMovePreview(Graphics g, Shape shape, Point previewLoc) {
         moverService.renderMovePreview(g, shape, previewLoc);
+    }
+
+    @Override
+    public SelectionMode getScaleHandleAt(Shape shape, Point p) {
+        // Use tolerance of 10 pixels for handle detection
+        return scalerService.getSelectionMode(shape, p, 10);
+    }
+
+    @Override
+    public void scaleShape(Shape shape, Point newPoint, SelectionMode mode) {
+        scalerService.scale(shape, newPoint, mode);
+        repaint();
+    }
+
+    @Override
+    public void renderScalePreview(Graphics g, Shape shape, Point newPoint, SelectionMode mode) {
+        scalerService.renderScalePreview(g, shape, newPoint, mode);
     }
 }

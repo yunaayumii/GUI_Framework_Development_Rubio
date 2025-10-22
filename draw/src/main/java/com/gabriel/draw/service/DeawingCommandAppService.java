@@ -2,6 +2,7 @@ package com.gabriel.draw.service;
 
 import com.gabriel.draw.command.*;
 import com.gabriel.drawfx.DrawMode;
+import com.gabriel.drawfx.SelectionMode;
 import com.gabriel.drawfx.ShapeMode;
 import com.gabriel.drawfx.command.Command;
 import com.gabriel.drawfx.command.CommandService;
@@ -173,5 +174,21 @@ public class DeawingCommandAppService implements AppService {
     @Override
     public void renderMovePreview(Graphics g, Shape shape, Point previewLoc) {
         appService.renderMovePreview(g, shape, previewLoc);
+    }
+
+    @Override
+    public SelectionMode getScaleHandleAt(Shape shape, Point p) {
+        return appService.getScaleHandleAt(shape, p);
+    }
+
+    @Override
+    public void scaleShape(Shape shape, Point newPoint, SelectionMode mode) {
+        appService.scaleShape(shape, newPoint, mode);
+        updateButtonStates();
+    }
+
+    @Override
+    public void renderScalePreview(Graphics g, Shape shape, Point newPoint, SelectionMode mode) {
+        appService.renderScalePreview(g, shape, newPoint, mode);
     }
 }
