@@ -9,5 +9,6 @@ public class ActionCommand {
     public static final String COLOR = "Color";
     public static final String FILL = "Fill";
     public static final String SELECT = "Select";
-    public static final String MOVE = "Move"; // new move command
+    public static final String MOVE = "Move";
+    public static final String SCALE = "Scale";
 }

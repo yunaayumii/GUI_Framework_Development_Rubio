@@ -39,6 +39,10 @@ public class ActionController implements ActionListener {
         else if(e.getActionCommand().equals(ActionCommand.MOVE)) {
             appService.setShapeMode(ShapeMode.Move);
         }
+        // handle scale mode action
+        else if(e.getActionCommand().equals(ActionCommand.SCALE)) {
+            appService.setShapeMode(ShapeMode.Scale);
+        }
         else if(e.getActionCommand().equals(ActionCommand.COLOR)) {
             Color selectedColor = JColorChooser.showDialog(null, "Choose a color", Color.WHITE);
             if (selectedColor != null) {

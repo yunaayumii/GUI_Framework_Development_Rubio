@@ -14,6 +14,7 @@ public class DrawingToolBar extends JToolBar {
     private final JButton ellipseButton = new JButton();
     private final JButton selectButton = new JButton();  // New Select button
     private final JButton moveButton = new JButton();    // Move button
+    private final JButton scaleButton = new JButton();   // scale button
     private final JButton colorButton = new JButton();
     private final JButton fillColorButton = new JButton();
     private final JButton undoButton = new JButton();
@@ -51,6 +52,12 @@ public class DrawingToolBar extends JToolBar {
         moveButton.setActionCommand(ActionCommand.MOVE);
         moveButton.setToolTipText("Move Selected Shape");
         add(moveButton);
+
+        // add Scale button (simple text, optional icon later)
+        scaleButton.addActionListener(actionListener);
+        scaleButton.setActionCommand(ActionCommand.SCALE);
+        scaleButton.setToolTipText("Scale Selected Shape");
+        add(scaleButton);
 
         addSeparator(); // Visual separator
 
@@ -112,7 +119,13 @@ public class DrawingToolBar extends JToolBar {
         String moveImageName = "move";
         imgLocation = "images/" + moveImageName + ".png";
         URL moveImageURL = DrawingToolBar.class.getResource(imgLocation);
-        moveButton.setIcon(new ImageIcon(moveImageURL, "select"));
+        moveButton.setIcon(new ImageIcon(moveImageURL, "move"));
+
+        String scaleImageName = "scale";
+        imgLocation = "images/" + scaleImageName + ".png";
+        URL scaleImageURL = DrawingToolBar.class.getResource(imgLocation);
+        scaleButton.setIcon(new ImageIcon(scaleImageURL, "scale"));
+
 
         String colorImageName = "color";
         imgLocation = "images/" + colorImageName + ".png";
